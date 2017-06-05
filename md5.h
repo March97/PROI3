@@ -22,6 +22,7 @@ private:
     void init(); //funkcja inicjalizacycja wyk w konstruktorach
     static void decode(uint4 output[], const uint1 input[], size_type len); //dekodowanie input unsigned char do output uint4, len dlugosc tablicy
     static void encode(uint1 output[], const uint4 input[], size_type len); //odwrotnosc decode
+    void transform(const uint1 block[blocksize]); //automat okreslajacy wartosci w poszczegolnych 64 stanach
 
     //operacje logiczne
     static inline uint4 F(uint4 x, uint4 y, uint4 z);

@@ -66,6 +66,20 @@ md5::md5()
   init();
 }
 
+md5::md5(const std::string &text)
+{
+  init();
+  update(text.c_str(), text.length());
+  finalize();
+}
+
+md5::md5(char * Input, long length)
+{
+  init();
+  update(Input, length);
+  finalize();
+}
+
 void md5::init()
 {
   finalized = false;
@@ -269,4 +283,19 @@ std::string md5::hex() const
   buf[32]=0;
 
   return std::string(buf);
+}
+
+std::string md5::md5str(const std::string str)
+{
+    md5 MD5 = md5(str);
+
+    return MD5.hex();
+}
+
+//AM Edit read in char array
+std::string md5::md5str(char * Input, long length)
+{
+    md5 MD5 = md5(Input, length);
+
+    return MD5.hex();
 }

@@ -6,8 +6,12 @@ public:
     typedef unsigned int size_type;
 
     md5();
+    md5(const std::string& text);
+    md5(char * Input, long length);
 
     std::string hex() const; // zwraca liczbe w kodzie hexadecymalnym jako string
+    std::string md5str(const std::string str);
+    std::string md5str(char * Input, long length);
 
 private:
 
@@ -41,3 +45,4 @@ private:
     static inline void II(uint4 &a, uint4 b, uint4 c, uint4 d, uint4 x, uint4 s, uint4 ac);
 
 };
+

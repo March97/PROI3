@@ -179,6 +179,41 @@ void md5::transform(const uint1 block[blocksize])
   state[2] += c;
   state[3] += d;
 
-  // Zeroize sensitive information.
+  // zerowanie przetworzonej informacji.
   memset(x, 0, sizeof x);
+}
+
+void md5::update(const unsigned char input[], size_type length)
+{
+  // oblicza liczbe bitow modulo 64
+  size_type index = count[0] / 8 % blocksize;
+
+  // obliczenie liczby bitow
+  if ((count[0] += (length << 3)) < (length << 3))
+    count[1]++;
+  count[1] += (length >> 29);
+
+  // liczba bitow ktorej potrzebujemy w buffer
+  size_type firstpart = 64 - index;
+
+  size_type i;
+
+  // transform tyle razy ile mozliwe
+  if (length >= firstpart)
+  {
+    // wypelnij buffer potem transform
+    memcpy(&buffer[index], input, firstpart);
+    transform(buffer);
+
+    // transform bloki 64 bitowe
+    for (i = firstpart; i + blocksize <= length; i += blocksize)
+      transform(&input[i]);
+
+    index = 0;
+  }
+  else
+    i = 0;
+
+  // buffer kopiowany na wyjscie
+  memcpy(&buffer[index], &input[i], length-i);
 }

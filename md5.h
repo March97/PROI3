@@ -7,6 +7,8 @@ public:
 
     md5();
 
+    std::string hex() const; // zwraca liczbe w kodzie hexadecymalnym jako string
+
 private:
 
     typedef unsigned char uint1; //  8bit

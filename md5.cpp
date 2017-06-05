@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cstdio>
 #include <string.h>
 #include "md5.h"
 
@@ -62,21 +63,21 @@ inline void md5::II(uint4 &a, uint4 b, uint4 c, uint4 d, uint4 x, uint4 s, uint4
 
 md5::md5()
 {
-    init();
+  init();
 }
 
 void md5::init()
 {
-    finalized = false;
+  finalized = false;
 
-    count[0] = 0;
-    count[1] = 0;
+  count[0] = 0;
+  count[1] = 0;
 
-    // ustawienie wartosci poczatkowych.
-    state[0] = 0x67452301; //A
-    state[1] = 0xefcdab89; //B
-    state[2] = 0x98badcfe; //C
-    state[3] = 0x10325476; //D
+  // ustawienie wartosci poczatkowych.
+  state[0] = 0x67452301; //A
+  state[1] = 0xefcdab89; //B
+  state[2] = 0x98badcfe; //C
+  state[3] = 0x10325476; //D
 }
 
 void md5::decode(uint4 output[], const uint1 input[], size_type len)
@@ -255,4 +256,17 @@ md5& md5::finalize()
   }
 
   return *this;
+}
+
+std::string md5::hex() const
+{
+  if (!finalized)
+    return "";
+
+  char buf[33];
+  for (int i=0; i<16; i++)
+    sprintf(buf+i*2, "%02x", digest[i]);
+  buf[32]=0;
+
+  return std::string(buf);
 }

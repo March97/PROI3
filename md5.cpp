@@ -217,3 +217,42 @@ void md5::update(const unsigned char input[], size_type length)
   // buffer kopiowany na wyjscie
   memcpy(&buffer[index], &input[i], length-i);
 }
+
+void md5::update(const char input[], size_type length)
+{
+  update((const unsigned char*)input, length);
+}
+
+md5& md5::finalize()
+{
+  static unsigned char padding[64] = {
+    0x80, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+  };
+
+  if (!finalized) {
+    // zapisuje liczbe bitow
+    unsigned char bits[8];
+    encode(bits, count, 8);
+
+    // rozwlekanie do 56 mod 64.
+    size_type index = count[0] / 8 % 64;
+    size_type padLen = (index < 56) ? (56 - index) : (120 - index);
+    update(padding, padLen);
+
+    // dodawanie do dlugosci (przed padding)
+    update(bits, 8);
+
+    // zapisywanie stanow do digest
+    encode(digest, state, 16);
+
+    // serowanie zbednych informacji
+    memset(buffer, 0, sizeof buffer);
+    memset(count, 0, sizeof count);
+
+    finalized=true;
+  }
+
+  return *this;
+}

@@ -23,7 +23,9 @@ private:
     static void decode(uint4 output[], const uint1 input[], size_type len); //dekodowanie input unsigned char do output uint4, len dlugosc tablicy
     static void encode(uint1 output[], const uint4 input[], size_type len); //odwrotnosc decode
     void transform(const uint1 block[blocksize]); //automat okreslajacy wartosci w poszczegolnych 64 stanach
-    void update(const unsigned char *buf, size_type length); //kieruje operacjami wykonywanymi przez algorytm md 5
+    void update(const unsigned char *buf, size_type length); //kieruje operacjami wykonywanymi przez algorytm md5
+    void update(const char *buf, size_type length); //update dla char bez unsigned
+    md5& finalize(); // konczy operacje md5, zapisuje wynik operacji i zeruje dane powstale w  wyniku dzialania algorytmu
 
     //operacje logiczne
     static inline uint4 F(uint4 x, uint4 y, uint4 z);

@@ -285,15 +285,14 @@ std::string md5::hex() const
   return std::string(buf);
 }
 
-std::string md5::md5str(const std::string str)
+std::string md5str(const std::string str)
 {
     md5 MD5 = md5(str);
 
     return MD5.hex();
 }
 
-//AM Edit read in char array
-std::string md5::md5str(char * Input, long length)
+std::string md5str(char * Input, long length)
 {
     md5 MD5 = md5(Input, length);
 

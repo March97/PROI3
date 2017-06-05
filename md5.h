@@ -10,8 +10,7 @@ public:
     md5(char * Input, long length);
 
     std::string hex() const; // zwraca liczbe w kodzie hexadecymalnym jako string
-    std::string md5str(const std::string str);
-    std::string md5str(char * Input, long length);
+
 
 private:
 
@@ -46,3 +45,6 @@ private:
 
 };
 
+    //funkcje do wywolywania algorytmu
+    std::string md5str(const std::string str);
+    std::string md5str(char * Input, long length);

@@ -22,6 +22,7 @@ int main(int argc, char *argv[])
     std::string command = argv[1]; //hash lub compare
 
     std::string Test; // = "Hello World!";
+    std::string Test2;
 
     //std::string Temp =  md5str(Test);
     //std::cout << Temp.c_str() << std::endl;
@@ -65,9 +66,10 @@ int main(int argc, char *argv[])
         }
 
         file1 >> Test;
+        file2 >> Test2;
         std::string Temp =  md5str(Test);
 
-        if(Temp.c_str() == file2)
+        if(Temp.c_str() == Test2)
         {
             std::cout << "File is compatible." << std::endl;
         }else

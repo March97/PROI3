@@ -29,7 +29,7 @@ int main(int argc, char *argv[])
     std::fstream file1;
     std::fstream file2;
 
-    if(command == "hash")
+    if(command == "hash") //argv[2]- plik wejsciowy argv[3]-plik wyjsciowy
     {
         file1.open(argv[2], std::ios::binary | std::ios::in);
         if(file1.good() == false)
@@ -50,8 +50,32 @@ int main(int argc, char *argv[])
     }else
     if(command == "compare")
     {
+        file1.open(argv[2], std::ios::binary | std::ios::in);
+        if(file1.good() == false)
+        {
+            std::cout << "Error read the first file." << std::endl;
+            exit(0);
+        }
 
-    }
+        file2.open(argv[3], std::ios::binary | std::ios::in);
+        if(file2.good() == false)
+        {
+            std::cout << "Error read the second file." << std::endl;
+            exit(0);
+        }
+
+        file1 >> Test;
+        std::string Temp =  md5str(Test);
+
+        if(Temp.c_str() == file2)
+        {
+            std::cout << "File is compatible." << std::endl;
+        }else
+        {
+            std::cout << "File is not compatible." << std::endl;
+        }
+
+    }else std::cout << "Command not found." << std::endl;
 
     /*file1.open(name_file + ".txt", std::ios::binary | std::ios::in);
     if(file1.good() == false)

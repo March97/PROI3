@@ -1,7 +1,7 @@
 CXX = g++  -Wall -pedantic -std=c++11
 
-sources=main.cpp md5.cpp
-headers=md5.h
+sources=main.cpp md5.cpp files.cpp
+headers=md5.h files.h
 
 debug: $(sources) $(headers)
 	$(CXX) -g -DDEBUG $(sources) -o $@

@@ -3,6 +3,7 @@
 #include <cstdlib>
 #include <string.h>
 #include "md5.h"
+#include "files.h"
 
 int main(int argc, char *argv[])
 {
@@ -29,6 +30,7 @@ int main(int argc, char *argv[])
 
     std::fstream file1;
     std::fstream file2;
+    files filer;
 
     if(command == "hash") //argv[2]- plik wejsciowy argv[3]-plik wyjsciowy
     {
@@ -39,7 +41,8 @@ int main(int argc, char *argv[])
             exit(0);
         }
 
-        file1 >> Test;
+        //file1 >> Test;
+        Test = filer.read(file1);
         std::string Temp =  md5str(Test);
 
         file2.open(argv[3], std::ios::out);
@@ -65,8 +68,11 @@ int main(int argc, char *argv[])
             exit(0);
         }
 
-        file1 >> Test;
-        file2 >> Test2;
+        //file1 >> Test;
+        Test = filer.read(file1);
+        //file2 >> Test2;
+        Test2 = filer.read(file2);
+
         std::string Temp =  md5str(Test);
 
         if(Temp.c_str() == Test2)

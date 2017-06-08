@@ -46,7 +46,7 @@
 #include <cstdlib>
 #include <string.h>
 #include "md5.h"
-#include "Files.h"
+#include "files.h"
 
 int main(int argc, char *argv[])
 {

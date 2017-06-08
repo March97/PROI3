@@ -1,7 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <string.h>
-#include "Files.h"
+#include "files.h"
 
 std::string Files::read(std::fstream &file)
 {

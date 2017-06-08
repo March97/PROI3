@@ -105,7 +105,7 @@ void md5::encode(uint1 output[], const uint4 input[], size_type len)
 {
   for (size_type i = 0, j = 0; j < len; i++, j += 4)
   {
-    output[j] = input[i] & 0xff;
+    output[j] = input[i] & 0xff; //0xff 255 - 11111111
     output[j+1] = (input[i] >> 8) & 0xff;
     output[j+2] = (input[i] >> 16) & 0xff;
     output[j+3] = (input[i] >> 24) & 0xff;
@@ -262,7 +262,7 @@ md5& md5::finalize()
     // zapisywanie stanow do digest
     encode(digest, state, 16);
 
-    // serowanie zbednych informacji
+    // zerowanie zbednych informacji
     memset(buffer, 0, sizeof buffer);
     memset(count, 0, sizeof count);
 

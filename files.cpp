@@ -1,9 +1,9 @@
 #include <iostream>
 #include <fstream>
 #include <string.h>
-#include "files.h"
+#include "Files.h"
 
-std::string files::read(std::fstream &file)
+std::string Files::read(std::fstream &file)
 {
     std::string StringOut = "", Temp = "";
 
